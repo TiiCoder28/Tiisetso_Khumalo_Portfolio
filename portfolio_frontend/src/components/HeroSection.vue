@@ -10,6 +10,12 @@ const subtitleRef = ref(null)
 const linksRef = ref(null)
 const scanLineRef = ref(null)
 
+const pathToCV = '/documents/TIISETSO_KHUMALO_CV.pdf'
+
+const viewCV = (path) => {
+  window.open(path, '_blank')
+}
+
 onMounted(() => {
   // GSAP Timeline for entrance animations
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -219,6 +225,7 @@ onMounted(() => {
 
         <!-- Download CV Button -->
         <button
+        v-on:click="viewCV(pathToCV)"
           class="group relative flex items-center gap-2 px-6 py-3 rounded-lg overflow-hidden"
         >
           <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-80 group-hover:opacity-100 transition-opacity"></div>

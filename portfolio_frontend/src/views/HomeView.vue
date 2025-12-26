@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import HeroSection from '@/components/HeroSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import SkillsSection from '@/components/SkillsSection.vue'
+import ExperienceSection from '@/components/ExperienceSection.vue'
+import ProjectsSection from '@/components/ProjectsSection.vue'
 import SpaceJourney from '@/components/space/SpaceJourney.vue'
 
 // Toggle between normal view and space journey experience
@@ -77,6 +79,8 @@ const toggleSpaceJourney = () => {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
       </div>
     </Transition>
   </main>

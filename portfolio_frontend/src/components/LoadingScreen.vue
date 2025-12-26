@@ -294,24 +294,24 @@ onUnmounted(() => {
       <!-- Title -->
       <h1 class="text-4xl md:text-6xl font-bold text-white mb-8 tracking-wider">
         <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-          ENTERING
+          ENTERING INTO TIISETSO'S UNIVERSE
         </span>
       </h1>
       
       <!-- Progress Ring -->
-      <div class="relative w-32 h-32 mx-auto mb-8">
-        <svg class="w-full h-full transform -rotate-90">
+      <!--div class="relative w-32 h-32 mx-auto mb-8">
+        <svg class="w-full h-full transform -rotate-90" -->
           <!-- Background ring -->
-          <circle
+          <!-- <circle
             cx="64"
             cy="64"
             r="58"
             stroke="rgba(0, 255, 255, 0.2)"
             stroke-width="4"
             fill="none"
-          />
+          /> -->
           <!-- Progress ring -->
-          <circle
+          <!-- <circle
             cx="64"
             cy="64"
             r="58"
@@ -330,15 +330,15 @@ onUnmounted(() => {
               <stop offset="100%" stop-color="#ff00ff" />
             </linearGradient>
           </defs>
-        </svg>
+        </svg> -->
         
         <!-- Percentage -->
-        <div class="absolute inset-0 flex items-center justify-center">
+        <!-- <div class="absolute inset-0 flex items-center justify-center">
           <span class="text-2xl font-mono text-cyan-400">
             {{ Math.round(loadingProgress * 100) }}%
           </span>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       
       <!-- Loading text -->
       <p class="text-cyan-400/80 text-sm tracking-widest uppercase animate-pulse">

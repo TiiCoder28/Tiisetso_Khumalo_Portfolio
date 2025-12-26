@@ -14,11 +14,11 @@ const skillCategories = [
     icon: '🧠',
     color: 'cyan',
     skills: [
-      { name: 'LLM Integration (OpenAI)', level: 90 },
-      { name: 'RAG Systems', level: 85 },
-      { name: 'Prompt Engineering', level: 95 },
-      { name: 'Fine-tuning & Evaluation', level: 80 },
-      { name: 'Agentic Workflows', level: 85 }
+      { name: 'LLM Integration (OpenAI)', level: 100 },
+      { name: 'RAG Systems', level: 100 },
+      { name: 'Prompt Engineering', level: 100 },
+      { name: 'Fine-tuning & Evaluation', level: 90 },
+      { name: 'Agentic Workflows(OpenAI Agents SDK)', level: 100 }
     ]
   },
   {
@@ -28,7 +28,8 @@ const skillCategories = [
     skills: [
       { name: 'Python', level: 90 },
       { name: 'FastAPI', level: 88 },
-      { name: 'Flask / Django', level: 75 },
+      { name: 'Flask', level: 85 },
+      { name: 'Node.js', level: 65 },
       { name: 'RESTful API Design', level: 85 },
       { name: 'Database Architecture', level: 80 }
     ]
@@ -38,11 +39,12 @@ const skillCategories = [
     icon: '🎨',
     color: 'blue',
     skills: [
-      { name: 'JavaScript', level: 85 },
+      { name: 'Vanilla JavaScript', level: 85 },
       { name: 'Vue.js', level: 82 },
       { name: 'HTML/CSS', level: 88 },
       { name: 'Tailwind CSS', level: 85 },
-      { name: 'Responsive Design', level: 80 }
+      { name: 'Responsive Design', level: 80 },
+      { name: 'Three.js', level: 60 }
     ]
   },
   {
@@ -65,16 +67,25 @@ const certifications = [
     code: 'AI-102',
     icon: '🎖️',
     issuer: 'Microsoft',
-    color: 'from-cyan-400 to-blue-500'
+    color: 'from-cyan-400 to-blue-500',
+    certificateFile: '/certificates/Tiisetso_Khumalo_Azure_AI_Engineer_Associate.pdf'
   },
   {
     title: 'Security, Compliance & Identity',
     code: 'SC-900',
     icon: '🛡️',
     issuer: 'Microsoft',
-    color: 'from-purple-400 to-pink-500'
+    color: 'from-purple-400 to-pink-500',
+    certificateFile: '/certificates/Tiisetso_Khumalo_Azure_Security_Compliance_Identity.pdf'
   }
 ]
+const viewCertificate = (cert) => {
+    console.log(cert);
+    console.log(cert.certificateFile);
+    console.log("Button clicked");
+  const certPath = `${cert.certificateFile}`;
+  window.open(certPath, '_blank')
+}
 
 onMounted(() => {
   // Animate skill cards on scroll
@@ -264,7 +275,7 @@ const getColorClasses = (color) => {
       <!-- Certifications -->
       <div class="certifications-container">
         <div class="text-center mb-8">
-          <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+          <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 mt-16">
             <span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               🏆 Certifications
             </span>
@@ -290,6 +301,9 @@ const getColorClasses = (color) => {
                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">{{ cert.issuer }}</div>
                 <h4 class="text-white font-semibold">{{ cert.title }}</h4>
                 <div class="text-cyan-400 text-sm font-mono mt-1">{{ cert.code }}</div>
+                <button 
+                v-on:click="viewCertificate(cert)"
+                class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2">View Certificate</button>
               </div>
             </div>
 
