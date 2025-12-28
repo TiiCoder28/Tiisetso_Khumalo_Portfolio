@@ -343,10 +343,37 @@ onUnmounted(() => {
   cancelAnimationFrame(animationId)
   window.removeEventListener('resize', handleResize)
   
-  if (renderer) {
-    renderer.dispose()
-    containerRef.value?.removeChild(renderer.domElement)
+  // Dispose wormhole mesh
+  if (wormhole) {
+    wormhole.geometry?.dispose()
+    wormhole.material?.dispose()
   }
+  
+  // Dispose all scene children
+  scene?.traverse((child) => {
+    if (child.geometry) child.geometry.dispose()
+    if (child.material) {
+      if (Array.isArray(child.material)) {
+        child.material.forEach(m => m.dispose())
+      } else {
+        child.material.dispose()
+      }
+    }
+  })
+  
+  if (renderer) {
+    const domElement = renderer.domElement
+    renderer.dispose()
+    renderer.forceContextLoss()
+    renderer.domElement = null
+    if (domElement && containerRef.value?.contains(domElement)) {
+      containerRef.value.removeChild(domElement)
+    }
+  }
+  
+  scene = null
+  camera = null
+  renderer = null
 })
 
 watch(() => props.progress, (newVal) => {

@@ -147,6 +147,7 @@ const getColorClasses = (color) => {
       border: 'border-cyan-500/30 hover:border-cyan-400/60',
       bg: 'from-cyan-500/10 to-cyan-500/5',
       text: 'text-cyan-400',
+      bgSolid: 'bg-cyan-400',
       progress: 'from-cyan-400 to-cyan-600',
       glow: 'shadow-cyan-500/20'
     },
@@ -154,6 +155,7 @@ const getColorClasses = (color) => {
       border: 'border-purple-500/30 hover:border-purple-400/60',
       bg: 'from-purple-500/10 to-purple-500/5',
       text: 'text-purple-400',
+      bgSolid: 'bg-purple-400',
       progress: 'from-purple-400 to-purple-600',
       glow: 'shadow-purple-500/20'
     },
@@ -161,6 +163,7 @@ const getColorClasses = (color) => {
       border: 'border-blue-500/30 hover:border-blue-400/60',
       bg: 'from-blue-500/10 to-blue-500/5',
       text: 'text-blue-400',
+      bgSolid: 'bg-blue-400',
       progress: 'from-blue-400 to-blue-600',
       glow: 'shadow-blue-500/20'
     },
@@ -168,6 +171,7 @@ const getColorClasses = (color) => {
       border: 'border-green-500/30 hover:border-green-400/60',
       bg: 'from-green-500/10 to-green-500/5',
       text: 'text-green-400',
+      bgSolid: 'bg-green-400',
       progress: 'from-green-400 to-green-600',
       glow: 'shadow-green-500/20'
     }
@@ -200,7 +204,7 @@ const getColorClasses = (color) => {
       <div class="text-center mb-16">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/5 mb-6">
           <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-          <span class="text-purple-400 text-sm tracking-widest uppercase">Technical Arsenal</span>
+          <span class="text-purple-400 text-sm tracking-widest uppercase">Technical Skills</span>
         </div>
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
           <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
@@ -262,12 +266,12 @@ const getColorClasses = (color) => {
 
           <!-- Corner decorations -->
           <div class="absolute top-0 left-0 w-8 h-8 opacity-50">
-            <div class="absolute top-2 left-2 w-4 h-[1px]" :class="`bg-${category.color}-400`"></div>
-            <div class="absolute top-2 left-2 w-[1px] h-4" :class="`bg-${category.color}-400`"></div>
+            <div class="absolute top-2 left-2 w-4 h-[1px]" :class="getColorClasses(category.color).text.replace('text-', 'bg-')"></div>
+            <div class="absolute top-2 left-2 w-[1px] h-4" :class="getColorClasses(category.color).text.replace('text-', 'bg-')"></div>
           </div>
           <div class="absolute bottom-0 right-0 w-8 h-8 opacity-50">
-            <div class="absolute bottom-2 right-2 w-4 h-[1px]" :class="`bg-${category.color}-400`"></div>
-            <div class="absolute bottom-2 right-2 w-[1px] h-4" :class="`bg-${category.color}-400`"></div>
+            <div class="absolute bottom-2 right-2 w-4 h-[1px]" :class="getColorClasses(category.color).text.replace('text-', 'bg-')"></div>
+            <div class="absolute bottom-2 right-2 w-[1px] h-4" :class="getColorClasses(category.color).text.replace('text-', 'bg-')"></div>
           </div>
         </div>
       </div>
@@ -325,7 +329,7 @@ const getColorClasses = (color) => {
         <p class="text-gray-400 text-sm uppercase tracking-widest mb-6">Technologies I Work With</p>
         <div class="flex flex-wrap justify-center gap-4">
           <div
-            v-for="tech in ['Python', 'Vue.js', 'FastAPI', 'PostgreSQL', 'AWS', 'OpenAI', 'LangChain', 'Docker']"
+            v-for="tech in ['Python', 'Vue.js', 'FastAPI', 'PostgreSQL', 'AWS', 'OpenAI', 'Tailwind CSS', 'Nginx', 'Linux']"
             :key="tech"
             class="px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700/50 text-gray-300 text-sm hover:border-cyan-500/50 hover:text-cyan-400 transition-all duration-300 cursor-default"
           >

@@ -10,6 +10,25 @@ const projectsRef = ref(null)
 const activeProject = ref(null)
 
 const projects = [
+    {
+        id: 'weatherApp',
+        title: "CloudChaser",
+        subtitle: "Weather Forecasting App",
+        status: "Live",
+        icon: "☁️",
+        color: "cyan",
+        description: "A sleek web application that provides accurate and up-to-date weather forecasts using OpenWeatherMap API. This was my first app that I developed using HTML, CSS, and JavaScript and deployed using github pages.",
+        tech: ["OpenWeatherMap API", "CSS", "HTML", "JavaScript"],
+        features: [
+            "Current weather data for any location. The user can either enter the location of their choice or allow the app to access their geolocation.",
+            "5-day weather forecasts",
+            "Responsive design for mobile and desktop",
+            "Backgrounds that changes every 5 seconds"
+        ],
+        links: {
+            website: "https://tiicoder28.github.io/weatherApp/"
+        }
+    },
   {
     id: 'radai',
     title: 'RadAI',
@@ -17,22 +36,25 @@ const projects = [
     status: 'In Testing',
     icon: '🏥',
     color: 'cyan',
-    description: 'AI-powered medical assistant chatbot that processes user symptoms and provides medical guidance through WhatsApp.',
+    description: 'AI-powered medical assistant chatbot that processes user symptoms and provides medical guidance through WhatsApp. I developed this application while at Kion Consulting for a client.',
     tech: ['WhatsApp Graph API', 'OpenAI API', 'Python', 'FastAPI'],
     features: [
       'Symptom analysis and medical guidance',
       'Natural language processing for health queries',
       'WhatsApp integration for accessibility',
-      'Real-time AI-powered responses'
+      'Real-time AI-powered responses',
+      'Provides potential diagnoses based on the image and additional context given by doctor',
+      'Powered by OpenAI GPT-Models and created using the OpenAI Agents SDK',
+      'Has patient management features for doctors to keep track of their patients'
     ],
     links: {
-      whatsapp: 'https://wa.link/gm3pda'
+      github: 'https://github.com/tiisetsok28/RadAI'
     }
   },
   {
     id: 'tutoring',
     title: 'Thuto',
-    subtitle: 'AI Study Assistant',
+    subtitle: 'School Tutoring Assistant',
     status: 'Live',
     icon: '📚',
     color: 'purple',
@@ -46,9 +68,32 @@ const projects = [
     ],
     links: {
       website: 'http://thuto.kion.co.za/',
-      whatsapp: 'tel:0642996105'
+    //   whatsapp: 'tel:0642996105'
     }
   },
+  {
+    id: "tutoring",
+    title: "Smart Varsity Assistant",
+    subtitle: "University Tutor Chatbot",
+    status: "In Testing",
+    icon: "📚",
+    color: "purple",
+    description: "AI-powered chatbot that assists university students with assignment help, study tips, and academic guidance through a web interface.",
+    tech: ["Vue.js", "Flask", "OpenAI API", "OpenAI Assistants API(about to be depricated)"],
+    features: [
+      "Assignment help and explanations",
+      "Study tips and learning strategies",
+      "Personalized tutoring experience",
+      "Web-based access for convenience",
+      "Can create different sessions for different modules",
+      "Specialises in C++, Calculus, Linear Algebra, Introduction to Programming, Data Structures and Algorithms, etc",
+      "I've been using it in my first year to assist me with assignements that I had"
+    ],
+    links: {
+        github: "https://github.com/TiiCoder28/Smart-Varsity-Assistant" 
+    }
+  },
+
   {
     id: 'email-scheduler',
     title: 'Email Scheduler',
@@ -153,9 +198,9 @@ const getStatusColor = (status) => {
             Projects
           </span>
         </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-500 mx-auto rounded-full"></div>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-500 mx-auto rounded-full text-center"></div>
         <p class="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">
-          AI-powered applications solving real-world problems
+          Some of the projects I have worked on recently, showcasing my skills in web development, AI integration, and automation.
         </p>
       </div>
 
@@ -200,7 +245,7 @@ const getStatusColor = (status) => {
             </div>
 
             <!-- Description -->
-            <p class="relative text-gray-400 text-sm md:text-base mb-4 line-clamp-3">
+            <p class="relative text-gray-400 text-sm md:text-base mb-4 line-clamp-4">
               {{ project.description }}
             </p>
 
@@ -270,6 +315,28 @@ const getStatusColor = (status) => {
                   </svg>
                   WhatsApp
                 </a>
+                <a 
+                  v-if="project.links.github"
+                  :href="project.links.github"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-700/50 text-gray-300 text-sm hover:bg-gray-600/50 transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <a
+                v-if="project.links.in-development"
+                :href="project.links.in-development"
+                target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/20 text-yellow-400 text-sm hover:bg-yellow-500/30 transition-colors"
+              >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                In Development
+              </a>
               </div>
             </div>
           </div>
@@ -281,7 +348,7 @@ const getStatusColor = (status) => {
         <p class="text-gray-400 mb-6">Interested in collaborating or have a project in mind?</p>
         <a 
           href="#contact"
-          class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
+          class="inline-flex items-center gap-3 px-8 py-4  rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
         >
           <span>Let's Build Something Amazing</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,9 +361,10 @@ const getStatusColor = (status) => {
 </template>
 
 <style scoped>
-.line-clamp-3 {
+.line-clamp-4 {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

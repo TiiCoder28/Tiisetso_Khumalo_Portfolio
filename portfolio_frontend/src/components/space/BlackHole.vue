@@ -310,10 +310,41 @@ onUnmounted(() => {
   cancelAnimationFrame(animationId)
   window.removeEventListener('resize', handleResize)
   
-  if (renderer) {
-    renderer.dispose()
-    containerRef.value?.removeChild(renderer.domElement)
+  // Dispose geometries and materials
+  if (blackHole) {
+    blackHole.geometry?.dispose()
+    blackHole.material?.dispose()
   }
+  if (accretionDisk) {
+    accretionDisk.geometry?.dispose()
+    accretionDisk.material?.dispose()
+  }
+  
+  // Dispose all scene children
+  scene?.traverse((child) => {
+    if (child.geometry) child.geometry.dispose()
+    if (child.material) {
+      if (Array.isArray(child.material)) {
+        child.material.forEach(m => m.dispose())
+      } else {
+        child.material.dispose()
+      }
+    }
+  })
+  
+  if (renderer) {
+    const domElement = renderer.domElement
+    renderer.dispose()
+    renderer.forceContextLoss()
+    renderer.domElement = null
+    if (domElement && containerRef.value?.contains(domElement)) {
+      containerRef.value.removeChild(domElement)
+    }
+  }
+  
+  scene = null
+  camera = null
+  renderer = null
 })
 
 // Watch for distortion changes (for scroll-based effects)

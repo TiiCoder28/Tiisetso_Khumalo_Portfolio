@@ -299,10 +299,33 @@ onUnmounted(() => {
   cancelAnimationFrame(animationId)
   window.removeEventListener('resize', handleResize)
   
-  if (renderer) {
-    renderer.dispose()
-    containerRef.value?.removeChild(renderer.domElement)
+  // Dispose geometries and materials
+  if (gridMesh) {
+    gridMesh.geometry.dispose()
+    gridMesh.material.dispose()
   }
+  if (planetMesh) {
+    planetMesh.geometry.dispose()
+    planetMesh.material.dispose()
+  }
+  if (glowMesh) {
+    glowMesh.geometry.dispose()
+    glowMesh.material.dispose()
+  }
+  
+  if (renderer) {
+    const domElement = renderer.domElement
+    renderer.dispose()
+    renderer.forceContextLoss()
+    renderer.domElement = null
+    if (domElement && containerRef.value?.contains(domElement)) {
+      containerRef.value.removeChild(domElement)
+    }
+  }
+  
+  scene = null
+  camera = null
+  renderer = null
 })
 </script>
 
