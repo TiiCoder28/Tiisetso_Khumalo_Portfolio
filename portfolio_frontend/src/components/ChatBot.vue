@@ -11,7 +11,7 @@ const isLoading = ref(false)
 const chatContainerRef = ref(null)
 const showInfo = ref(false)
 // API endpoint
-const API_URL = 'http://127.0.0.1:8000'
+const API_URL = 'https://tiisetso-khumalo-portfolio.onrender.com'
 
 // Toggle chat window
 const toggleChat = () => {
