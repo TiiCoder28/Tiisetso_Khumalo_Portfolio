@@ -48,18 +48,18 @@ app = FastAPI(
 # CORS - Allow your frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    # Production origins
+    
     allow_origins=[
-        'https://tiisetso-khumalo-portfolio.vercel.app/',
+        'https://tiisetso-khumalo-portfolio.vercel.app',
         os.getenv("FRONTEND_URL", "")
     ],
 
     # Development origins
-    allow_origins=[
-        'http://localhost:5173',
-        "http://localhost:8000",
-        os.getenv("FRONTEND_URL", "")
-    ],
+    # allow_origins=[
+    #     'http://localhost:5173',
+    #     "http://localhost:8000",
+    #     os.getenv("FRONTEND_URL", "")
+    # ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -162,4 +162,5 @@ async def status():
 # Run with: uvicorn app:app --reload
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
