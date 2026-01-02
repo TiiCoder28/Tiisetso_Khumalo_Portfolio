@@ -49,11 +49,11 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     # Production origins
-    # allow_origins=[
-    #     'https://tiisetso-khumalo-portfolio.vercel.app/',
-    #     "http://localhost:8000",
-    #     os.getenv("FRONTEND_URL", "")
-    # ],
+    allow_origins=[
+        'https://tiisetso-khumalo-portfolio.vercel.app/',
+        os.getenv("FRONTEND_URL", "")
+    ],
+
     # Development origins
     allow_origins=[
         'http://localhost:5173',
