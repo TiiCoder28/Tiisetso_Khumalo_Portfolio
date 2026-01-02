@@ -48,10 +48,17 @@ app = FastAPI(
 # CORS - Allow your frontend to call this API
 app.add_middleware(
     CORSMiddleware,
+    # Production origins
+    # allow_origins=[
+    #     'https://tiisetso-khumalo-portfolio.vercel.app/',
+    #     "http://localhost:8000",
+    #     os.getenv("FRONTEND_URL", "")
+    # ],
+    # Development origins
     allow_origins=[
-        "http://localhost:5173",
+        'http://localhost:5173',
         "http://localhost:8000",
-        os.getenv("FRONTEND_URL", "")  # Production URL
+        os.getenv("FRONTEND_URL", "")
     ],
     allow_credentials=True,
     allow_methods=["*"],
