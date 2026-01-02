@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import LoadingScreen from '@/components/LoadingScreen.vue'
+import ChatBot from '@/components/ChatBot.vue'
 
 const isLoading = ref(true)
 const showContent = ref(false)
@@ -39,6 +40,9 @@ onMounted(() => {
     <Transition name="content-fade">
       <RouterView v-if="showContent" />
     </Transition>
+
+    <!-- AI Chatbot (always visible after loading) -->
+    <ChatBot v-if="showContent" />
   </div>
 </template>
 

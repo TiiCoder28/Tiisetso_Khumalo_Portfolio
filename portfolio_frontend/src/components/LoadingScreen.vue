@@ -292,13 +292,10 @@ onUnmounted(() => {
   }
   
   if (renderer) {
-    const domElement = renderer.domElement
     renderer.dispose()
     renderer.forceContextLoss()
     renderer.domElement = null
-    if (domElement && containerRef.value?.contains(domElement)) {
-      containerRef.value.removeChild(domElement)
-    }
+    containerRef.value?.removeChild(renderer.domElement)
   }
   
   scene = null

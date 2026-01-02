@@ -71,7 +71,7 @@ const toggleSpaceJourney = () => {
     <!-- Space Journey Experience (scroll-driven black hole travel) -->
     <Transition name="journey-fade" mode="out-in">
       <template v-if="useSpaceJourney">
-        <SpaceJourney :key="'journey'" />
+        <SpaceJourney :key="'journey'" @exitJourney="toggleSpaceJourney" />
       </template>
       
       <!-- Standard Portfolio Sections -->

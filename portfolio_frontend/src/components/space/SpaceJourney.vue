@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Starfield from '@/components/space/Starfield.vue'
 import BlackHole from '@/components/space/BlackHole.vue'
 import Wormhole from '@/components/space/Wormhole.vue'
+import HomeView from '@/views/HomeView.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -113,6 +114,7 @@ onUnmounted(() => {
   ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 })
 
+defineEmits(['exitJourney'])
 defineExpose({ journeyProgress, currentPhase })
 </script>
 
@@ -188,6 +190,31 @@ defineExpose({ journeyProgress, currentPhase })
           <!-- New galaxy glow -->
           <div class="absolute inset-0 bg-gradient-radial from-purple-500/20 via-transparent to-transparent"></div>
         </div>
+      </Transition>
+
+      <!-- HomeView - Only visible at emergence -->
+      <Transition name="fade">
+        <div 
+          v-if="showEmergenceStars && emergenceOpacity > 0.5" 
+          class="absolute inset-0 overflow-y-auto"
+          :style="{ opacity: Math.min(1, (emergenceOpacity - 0.5) * 2) }"
+        >
+          <HomeView />
+        </div>
+      </Transition>
+
+      <!-- Exit Space Journey Button -->
+      <Transition name="fade">
+        <button
+          v-if="showEmergenceStars && emergenceOpacity > 0.7"
+          @click="$emit('exitJourney')"
+          class="fixed top-6 left-6 z-50 px-4 py-2 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-full text-white text-sm font-medium shadow-lg shadow-purple-500/30 hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Exit Space Journey
+        </button>
       </Transition>
 
       <!-- Vignette overlay -->

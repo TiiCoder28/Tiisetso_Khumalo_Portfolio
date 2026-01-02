@@ -22,7 +22,7 @@ const terminalLines = [
   { prefix: '>', text: 'Tiisetso Khumalo', delay: 0.5, isOutput: true },
   { prefix: '$', text: 'cat professional_summary.txt', delay: 1 },
   { prefix: '>', text: 'Innovative Web and AI Developer with expertise in', delay: 1.5, isOutput: true },
-  { prefix: '>', text: 'LLMs, RAG systems, and AI-driven workflows.', delay: 2, isOutput: true },
+  { prefix: '>', text: 'LLMs, RAG systems, and AI-driven workflows, Web design and development.', delay: 2, isOutput: true },
   { prefix: '>', text: 'Building production-ready AI applications', delay: 2.5, isOutput: true },
   { prefix: '>', text: 'across all sectors.', delay: 3, isOutput: true },
   { prefix: '$', text: 'echo $STATUS', delay: 3.5 },

@@ -1,0 +1,15 @@
+# Core API
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic
+
+# OpenAI
+openai
+
+# Vector search
+faiss-cpu
+numpy
+
+# Document processing
+PyPDF2
