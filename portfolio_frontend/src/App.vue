@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
+import { SpeedInsights } from "@vercel/speed-insights/vue"
 import LoadingScreen from '@/components/LoadingScreen.vue'
 import ChatBot from '@/components/ChatBot.vue'
 
@@ -26,6 +27,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <SpeedInsights />
   <div class="app-container min-h-screen bg-[#0a0e1a] text-white overflow-x-hidden">
     <!-- Loading Screen -->
     <Transition name="loading-fade">

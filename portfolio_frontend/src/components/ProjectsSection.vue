@@ -58,7 +58,7 @@ const projects = [
     status: 'Live',
     icon: '📚',
     color: 'purple',
-    description: 'Web + WhatsApp tutoring assistant for assignment help and study tips, built with intelligent AI responses.',
+    description: 'Assisted in developing the backend(AI tutors, chat sessions, user management, etc) for the in-house tutoring assistant for assignment help and study tips, built with intelligent AI responses.',
     tech: ['Vue.js', 'Flask', 'OpenAI API', 'WhatsApp API'],
     features: [
       'Assignment help and explanations',
@@ -101,15 +101,37 @@ const projects = [
     status: 'Completed',
     icon: '📧',
     color: 'green',
-    description: 'Intelligent scheduling app that automates meeting invites and checks participant availability using AI agents.',
+    description: 'Assisted in developing an intelligent scheduling app that automates meeting invites and checks participant availability using AI agents.',
     tech: ['Microsoft Graph API', 'OpenAI Agents SDK', 'Python', 'FastAPI'],
     features: [
       'Automated meeting scheduling',
       'Participant availability checking',
       'AI-powered agent orchestration',
-      'Microsoft 365 integration'
+      'Microsoft Graph API integration'
     ],
     links: {}
+  },
+  {
+    id: 'portfolio',
+    title: 'Personal Portfolio',
+    subtitle: 'Showcase Website',
+    status: 'Live',
+    icon: 'img:/Chatbot_Logo.png',
+    color: 'purple',
+    description: 'My personal portfolio website built with Vue.js and Vite, showcasing my projects, skills, and experience as a web and AI developer.',
+    tech: ['Vue.js', 'Vite', 'GSAP', 'Three.js'],
+    features: [
+        'Implemented three.js components in the space journey and on certain sections',
+        'Implemented GSAP scroll-triggered animations for a dynamic user experience',
+        'Implemented backend for chatbot intergration using FastAPI and deployed on Render.com',
+        'Frontend deployed on Vercel for optimal performance',
+      'Interactive project showcase',
+      'Smooth animations with GSAP',
+      '3D space journey experience using Three.js'
+    ],
+    links: {
+      github: 'https://github.com/TiiCoder28/Tiisetso_Khumalo_Portfolio'
+    }
   }
 ]
 
@@ -226,7 +248,15 @@ const getStatusColor = (status) => {
             <!-- Header -->
             <div class="relative flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
-                <span class="text-4xl">{{ project.icon }}</span>
+                <!-- Icon: supports both emoji and images (prefix with 'img:') -->
+                <template v-if="project.icon.startsWith('img:')">
+                  <img 
+                    :src="project.icon.replace('img:', '')" 
+                    :alt="project.title"
+                    class="w-10 h-10 rounded-lg object-cover"
+                  />
+                </template>
+                <span v-else class="text-4xl">{{ project.icon }}</span>
                 <div>
                   <h3 class="text-xl font-bold text-white group-hover:text-white transition-colors">
                     {{ project.title }}
