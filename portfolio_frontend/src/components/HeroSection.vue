@@ -4,12 +4,13 @@ import { gsap } from 'gsap'
 import Starfield from './space/Starfield.vue'
 
 const heroRef = ref(null)
-const nameRef = ref(null)
-const titleRef = ref(null)
-const subtitleRef = ref(null)
+const introRef = ref(null)
+const ctaPanelRef = ref(null)
+const imagePanelRef = ref(null)
 const linksRef = ref(null)
 const scanLineRef = ref(null)
 
+const profileImage = '/TiisetsoKhumalo.jpg'
 const pathToCV = '/documents/TIISETSO_KHUMALO_CV.pdf'
 
 const viewCV = (path) => {
@@ -31,20 +32,20 @@ onMounted(() => {
 
   // Main content animations
   tl.fromTo(
-    nameRef.value,
-    { opacity: 0, y: 50, scale: 0.9 },
-    { opacity: 1, y: 0, scale: 1, duration: 1.2 }
+    introRef.value,
+    { opacity: 0, y: 50 },
+    { opacity: 1, y: 0, duration: 1 }
   )
     .fromTo(
-      titleRef.value,
-      { opacity: 0, x: -50 },
-      { opacity: 1, x: 0, duration: 0.8 },
+      ctaPanelRef.value,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8 },
       '-=0.5'
     )
     .fromTo(
-      subtitleRef.value,
-      { opacity: 0, x: 50 },
-      { opacity: 1, x: 0, duration: 0.8 },
+      imagePanelRef.value,
+      { opacity: 0, x: 50, scale: 0.96 },
+      { opacity: 1, x: 0, scale: 1, duration: 1 },
       '-=0.5'
     )
     .fromTo(
@@ -64,19 +65,20 @@ onMounted(() => {
     stagger: 0.3
   })
 
-  // Glitch effect on name (occasional)
-  const glitchTimeline = gsap.timeline({ repeat: -1, repeatDelay: 5 })
-  glitchTimeline
-    .to(nameRef.value, { skewX: 5, duration: 0.1 })
-    .to(nameRef.value, { skewX: -3, duration: 0.1 })
-    .to(nameRef.value, { skewX: 0, duration: 0.1 })
+  gsap.to('.hero-orbit', {
+    rotate: 360,
+    transformOrigin: 'center center',
+    duration: 18,
+    repeat: -1,
+    ease: 'none',
+  })
 })
 </script>
 
 <template>
   <section
     ref="heroRef"
-    class="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+    class="relative min-h-screen w-full overflow-hidden"
   >
     <!-- Starfield Background -->
     <div class="absolute inset-0 w-full h-full">
@@ -127,67 +129,71 @@ onMounted(() => {
       <div class="absolute bottom-4 right-4 w-[2px] h-16 bg-gradient-to-t from-purple-400 to-transparent"></div>
     </div>
 
-    <!-- Main Content -->
-    <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
-      <!-- Status Indicator -->
-      <div class="flex items-center justify-center gap-2 mb-6">
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span class="text-xs text-cyan-400/80 tracking-[0.3em] uppercase font-medium">
-          System Online • Johannesburg, South Africa
-        </span>
-      </div>
+    <div class="relative z-20 mx-auto flex min-h-screen max-w-[1440px] items-center px-6 pb-16 pt-28 sm:px-10 lg:px-16">
+      <div class="grid w-full items-center gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(480px,1.05fr)] xl:gap-20">
+        <div>
+          <div ref="introRef" class="max-w-3xl">
+            <div class="mb-12 inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-slate-950/65 px-4 py-2 backdrop-blur-md">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-[11px] font-semibold uppercase tracking-[0.35em] text-cyan-300/80">Johannesburg, South Africa</span>
+            </div>
 
-      <!-- Name -->
-      <h1
-        ref="nameRef"
-        class="font-orbitron text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-wider"
-      >
-        <span class="relative inline-block">
-          <span class="relative z-10 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-            TIISETSO
-          </span>
-          <span class="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent blur-lg opacity-50">
-            TIISETSO
-          </span>
-        </span>
-        <br />
-        <span class="relative inline-block mt-2">
-          <span class="relative z-10 text-white">
-            KHUMALO
-          </span>
-          <span class="absolute inset-0 text-cyan-400 blur-md opacity-30">
-            KHUMALO
-          </span>
-        </span>
-      </h1>
+            <p class="mb-4 mt-12 pt-4 text-sm font-semibold uppercase tracking-[0.38em] text-cyan-300/70">AI Developer • Engineer • Builder</p>
 
-      <!-- Title -->
-      <div ref="titleRef" class="mb-4">
-        <div class="inline-flex items-center gap-4 px-6 py-5 border border-cyan-500/30 rounded-full bg-cyan-500/5 backdrop-blur-sm">
-          <div class="w-1 h-6 bg-gradient-to-b from-cyan-400 to-purple-500"></div>
-          <h2 class="text-xl md:text-2xl lg:text-3xl font-light tracking-wide">
-            <span class="text-cyan-400">Web </span>
-            <span class="text-gray-400 mx-2">& </span>
-            <span class="text-purple-400">AI Developer</span>
-            <span class="text-gray-500 mx-3"> | </span>
-            <span class="text-blue-400">AI Engineer</span>
-          </h2>
-          <div class="w-1 h-6 bg-gradient-to-b from-purple-500 to-cyan-400"></div>
-        </div>
-      </div>
+            <h1 class="font-orbitron text-5xl font-bold tracking-[0.08em] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+              <span class="bg-gradient-to-r from-cyan-300 via-sky-400 to-purple-500 bg-clip-text text-transparent">Tiisetso</span>
+              <br>
+              <span class="text-white">Khumalo</span>
+            </h1>
 
-      <!-- Subtitle / Tagline -->
-      <p
-        ref="subtitleRef"
-        class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 py-4 leading-relaxed"
-      >
-        Building intelligent systems that bridge
-        <span class="text-cyan-400">cutting-edge AI</span> with
-        <span class="text-purple-400">real-world impact</span>
-      </p>
+            <div class="mt-6 inline-flex flex-wrap items-center gap-4 rounded-full border border-cyan-500/25 bg-slate-950/55 px-5 py-4 backdrop-blur-sm">
+              <div class="h-6 w-1 rounded-full bg-gradient-to-b from-cyan-300 to-purple-500"></div>
+              <h2 class="text-lg font-light tracking-wide text-slate-100 sm:text-2xl lg:text-[1.7rem]">
+                <span class="text-purple-300">AI Developer</span>
+                <span class="mx-3 text-slate-600">|</span>
+                <span class="text-sky-300">AI Engineer</span>
+              </h2>
+              <div class="h-6 w-1 rounded-full bg-gradient-to-b from-purple-500 to-cyan-300"></div>
+            </div>
 
-      <!-- Links & Contact -->
-      <div ref="linksRef" class="flex flex-wrap items-center justify-center gap-4">
+            <p class="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+              Building intelligent systems that bridge
+              <span class="text-cyan-300"> cutting-edge AI </span>
+              with
+              <span class="text-purple-300"> real-world impact</span>, while documenting the projects, decisions, and lessons that shape my growth.
+            </p>
+          </div>
+
+          <div ref="ctaPanelRef" class="mt-10 rounded-[2rem] border border-cyan-400/18 bg-slate-950/65 p-6 shadow-[0_0_60px_rgba(0,240,255,0.08)] backdrop-blur-md">
+            <div class="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+              <div class="max-w-2xl">
+                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300/70">Build Log</p>
+                <h3 class="text-2xl font-semibold leading-tight text-white sm:text-3xl">Follow my journey through shipped work, project writeups, technical notes, and skill growth.</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-300 sm:text-base">A clear view into how I learn, what I build, and how I’m deepening my work across AI, ML, IoT, and engineering.</p>
+              </div>
+
+              <div class="flex w-full max-w-[280px] flex-col gap-3">
+                <a
+                  href="/blog"
+                  class="group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold"
+                >
+                  <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-90 transition-opacity group-hover:opacity-100"></span>
+                  <span class="absolute inset-[1px] rounded-full bg-slate-900 transition-colors group-hover:bg-slate-800"></span>
+                  <span class="relative z-10 text-white">Explore Build Log</span>
+                </a>
+                <button
+                  v-on:click="viewCV(pathToCV)"
+                  class="group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold"
+                >
+                  <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-90 transition-opacity group-hover:opacity-100"></span>
+                  <span class="absolute inset-[1px] rounded-full bg-slate-900 transition-colors group-hover:bg-slate-800"></span>
+                  <span class="relative z-10 text-white">Download CV</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div ref="linksRef" class="mt-8 flex flex-wrap items-center align-middle gap-4">
         <!-- GitHub -->
         <a
           href="https://github.com/TiiCoder28"
@@ -223,27 +229,47 @@ onMounted(() => {
           <span class="text-gray-300 group-hover:text-white transition-colors">Email</span>
         </a>
 
-        <!-- Download CV Button -->
-        <button
-        v-on:click="viewCV(pathToCV)"
-          class="group relative flex items-center gap-2 px-6 py-3 rounded-lg overflow-hidden"
-        >
-          <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-80 group-hover:opacity-100 transition-opacity"></div>
-          <div class="absolute inset-[1px] bg-gray-900 rounded-lg group-hover:bg-gray-800 transition-colors"></div>
-          <svg class="relative z-10 w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-          <span class="relative z-10 text-white font-medium">Download CV</span>
-        </button>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <!-- <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-end gap-2">
-        <span class="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
-        <div class="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center pt-2">
-          <div class="w-1 h-3 bg-cyan-400 rounded-full animate-bounce"></div>
+          </div>
         </div>
-      </div> -->
+
+        <div ref="imagePanelRef" class="relative mx-auto w-full max-w-[620px]">
+          <div class="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(circle,_rgba(0,240,255,0.18),_transparent_60%)] blur-3xl"></div>
+          <div class="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/18"></div>
+          <div class="hero-orbit absolute left-1/2 top-1/2 h-[580px] w-[580px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-purple-400/20"></div>
+
+          <div class="relative overflow-hidden rounded-[2.5rem] border border-cyan-400/20 bg-slate-950/75 p-5 shadow-[0_0_90px_rgba(0,240,255,0.08)] backdrop-blur-md">
+            <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,240,255,0.08),transparent_35%,rgba(168,85,247,0.08))]"></div>
+
+            <div class="relative rounded-[2rem] border border-cyan-400/20 bg-slate-900/80 p-5">
+              <div class="absolute left-6 top-6 z-20 rounded-full border border-cyan-400/30 bg-slate-950/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-200">Building in public</div>
+
+              <div class="relative mx-auto mt-12 flex h-[440px] w-[320px] items-center justify-center rounded-[2rem] border border-cyan-300/35 bg-[radial-gradient(circle_at_top,_rgba(0,240,255,0.18),_rgba(15,23,42,0.96)_55%)] p-3 shadow-[0_0_60px_rgba(0,240,255,0.15)] sm:h-[520px] sm:w-[380px]">
+                <div class="absolute inset-0 rounded-[2rem] border-2 border-transparent bg-[linear-gradient(135deg,rgba(0,240,255,0.6),rgba(168,85,247,0.55))] opacity-70 blur-sm"></div>
+                <img
+                  :src="profileImage"
+                  alt="Portrait of Tiisetso Khumalo"
+                  class="relative z-10 h-full w-full rounded-[1.6rem] object-cover object-center"
+                >
+              </div>
+
+              <div class="relative mt-6 grid gap-3 sm:grid-cols-3">
+                <div class="rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-4 text-center">
+                  <p class="text-[11px] uppercase tracking-[0.28em] text-cyan-300/70">Focus</p>
+                  <p class="mt-2 text-sm font-semibold text-white">AI Systems</p>
+                </div>
+                <div class="rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-4 text-center">
+                  <p class="text-[11px] uppercase tracking-[0.28em] text-cyan-300/70">Now Learning</p>
+                  <p class="mt-2 text-sm font-semibold text-white">ML, IoT</p>
+                </div>
+                <div class="rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-4 text-center">
+                  <p class="text-[11px] uppercase tracking-[0.28em] text-cyan-300/70">Approach</p>
+                  <p class="mt-2 text-sm font-semibold text-white">Build + Reflect</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Gradient Overlay -->

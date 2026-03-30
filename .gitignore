@@ -9,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 .DS_Store
-dist
 dist-ssr
 coverage
 *.local
@@ -47,3 +46,8 @@ __screenshots__/
 
 test-results/
 playwright-report/
+
+
+portfolio_frontend/node_modules
+portfolio_frontend/.env.production
+portfolio_frontend/.env.local

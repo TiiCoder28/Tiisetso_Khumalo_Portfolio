@@ -10,8 +10,7 @@ const messages = ref([])
 const isLoading = ref(false)
 const chatContainerRef = ref(null)
 const showInfo = ref(false)
-// API endpoint
-const API_URL = 'https://tiisetso-khumalo-portfolio.onrender.com'
+const API_URL = import.meta.env.VITE_PORTFOLIO_API_URL || 'http://localhost:8000'
 
 // Toggle chat window
 const toggleChat = () => {
@@ -238,8 +237,8 @@ const askQuickQuestion = (question) => {
             <div class="flex items-start gap-2">
               <span class="text-lg">💡</span>
               <p class="text-gray-300 text-xs leading-relaxed">
-                This chatbot is a <span class="text-cyan-400 font-medium">specialized AI assistant</span> that answers questions about my professional career and gives insights on how this website was created — from the space journey to the different components. 
-                <span class="text-purple-400">FAISS</span> is used for vector search and <span class="text-purple-400">OpenAI</span> for responses. Feel free to interact! 😊
+                This chatbot is a <span class="text-cyan-400 font-medium">portfolio-specific AI assistant</span> with two modes: one for my experience, projects, and Build Log, and one for the interactive space visuals. 
+                It uses <span class="text-purple-400">OpenAI</span> for responses and a <span class="text-purple-400">Supabase-backed knowledge store</span> for retrieval, with local fallback when needed. Ask about my work, the content system, or how the visuals were built.
               </p>
             </div>
           </div>

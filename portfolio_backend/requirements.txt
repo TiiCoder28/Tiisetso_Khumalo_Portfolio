@@ -7,6 +7,9 @@ pydantic
 # OpenAI
 openai
 
+# Supabase
+supabase
+
 # Vector search
 faiss-cpu
 numpy
