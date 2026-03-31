@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import profileImage from '/dist/assets/TiisetsoKhumalo.jpg'
+import profileImage from '/dist/TiisetsoKhumalo.jpg'
 import { gsap } from 'gsap'
 import Starfield from './space/Starfield.vue'
 
