@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import profileImage from '/dist/assets/TiisetsoKhumalo.jpg'
 import { gsap } from 'gsap'
 import Starfield from './space/Starfield.vue'
 
@@ -10,8 +11,7 @@ const imagePanelRef = ref(null)
 const linksRef = ref(null)
 const scanLineRef = ref(null)
 
-const profileImage = '/TiisetsoKhumalo.jpg'
-const pathToCV = '/documents/TIISETSO_KHUMALO_CV.pdf'
+const pathToCV = '/dist/documents/Tiisetso_Khumalo_CV.pdf'
 
 const viewCV = (path) => {
   window.open(path, '_blank')

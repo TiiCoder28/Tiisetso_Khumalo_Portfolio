@@ -10,7 +10,7 @@ const messages = ref([])
 const isLoading = ref(false)
 const chatContainerRef = ref(null)
 const showInfo = ref(false)
-const API_URL = import.meta.env.VITE_PORTFOLIO_API_URL || 'http://localhost:8000'
+const API_URL = import.meta.env.VITE_PORTFOLIO_API_URL
 
 // Toggle chat window
 const toggleChat = () => {
