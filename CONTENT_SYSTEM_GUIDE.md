@@ -11,8 +11,20 @@ This portfolio now includes a structured content system designed to do more than
 - AI-assisted draft generation for blog posts
 - AI-generated LinkedIn summaries for posts
 - skills, tags, projects, and post relationships
+- a Supabase-backed retrieval layer for chatbot knowledge storage and search
 
-The goal is to turn the portfolio into a living record of professional growth, project work, and technical learning.
+The goal is to turn the portfolio into a living record of professional growth, project work, and technical learning. Instead of treating the portfolio like a static CV, the site now documents what is being built, what is being learned, and how those systems are improving over time.
+
+## Why This Matters
+
+This project was built to show more than finished outcomes. It is intended to show:
+
+- how ideas are structured into real systems
+- how tools are selected and integrated
+- how technical decisions are made under practical constraints
+- how growth across AI, machine learning, IoT, agentic AI, and engineering is being tracked in public
+
+That makes the portfolio more useful to recruiters, collaborators, and technical reviewers because it reflects process, decision-making, and iteration rather than only final screenshots.
 
 ## What Was Built
 
@@ -44,8 +56,18 @@ The FastAPI backend now supports:
 - chatbot functionality for the portfolio
 - LinkedIn summary generation
 - AI draft post generation
+- Supabase knowledge sync and search status reporting
 
 This means the AI authoring workflow is separated from the public frontend and kept in the authoring/admin layer where it belongs.
+
+## Technology Stack
+
+- Vue.js frontend deployed on Vercel
+- FastAPI backend deployed on Render
+- Sanity Studio as the headless CMS and admin interface
+- Sanity dataset managing posts, projects, skills, tags, and content workflows
+- OpenAI API for LinkedIn summary generation, AI-assisted draft creation, and chatbot responses
+- Supabase Postgres as the managed knowledge store, with vector search used for embeddings retrieval
 
 ## Architecture
 
@@ -103,11 +125,27 @@ Main responsibilities:
 - chatbot API
 - LinkedIn summary generation endpoint
 - AI draft post generation endpoint
+- knowledge synchronization from local content into Supabase
+- retrieval against Supabase before falling back to FAISS
 
 Key files:
 
 - `portfolio_backend/app.py`
 - `portfolio_backend/chatbot.py`
+- `portfolio_backend/supabase_store.py`
+- `supabase/migrations/001_portfolio_knowledge.sql`
+
+## Build Log Features
+
+Each Build Log entry can include:
+
+- title and short summary
+- full post content
+- hero image and image gallery
+- project links and attachments
+- progress status and skills learned
+- related project references
+- LinkedIn-ready summary content
 
 ## Content Model
 
@@ -235,6 +273,47 @@ That means the AI does not write raw markdown into the field. Instead, it genera
 
 This makes the content render properly on the public blog page and keeps the Studio schema aligned with Sanity's content model.
 
+## Supabase Retrieval Layer
+
+Supabase was added to move embeddings and retrieval out of a local-only, in-memory-first setup and into a managed Postgres-backed store.
+
+Why this was done:
+
+- the backend is running on a constrained Render instance with 0.5 GB CPU / memory budget
+- keeping embeddings local increases pressure on backend resources
+- a managed vector-capable store makes retrieval more scalable and operationally cleaner
+- chatbot responses improve when retrieval stays fast and the app does not spend as much effort loading and searching local indexes
+
+How it works:
+
+1. Knowledge chunks are prepared from the portfolio sources.
+2. A Supabase migration creates the `knowledge_chunks` table and vector search RPC.
+3. The backend syncs chunks into Supabase through `POST /knowledge/sync`.
+4. Retrieval checks Supabase first.
+5. If Supabase is unavailable, FAISS remains as a fallback path.
+
+This architecture reduced dependence on local embeddings storage while keeping the system resilient.
+
+## What We Learned
+
+- Supabase is not only a hosted database; it gives access to Postgres capabilities that can be used as a vector database for embeddings.
+- Migrating from local FAISS storage to Supabase is practical when the data flow is structured and the sync path is explicit.
+- Sanity works well as the editorial layer for posts, skills, tags, and project relationships.
+- Populating Sanity with reusable tags and skills makes authoring faster and keeps content classification consistent.
+- Separating retrieval/storage concerns from the public frontend and from Studio concerns creates a cleaner architecture.
+- Moving embeddings to Supabase improved backend efficiency and reduced pressure on a small Render instance.
+
+## Current Status
+
+- The Build Log is live in the portfolio frontend.
+- Sanity Studio is connected and being used as the content management layer.
+- AI draft post generation is implemented.
+- LinkedIn summary generation is implemented.
+- Skills have been seeded in Sanity for reuse.
+- Tags have been populated in Sanity for classification and filtering.
+- Supabase retrieval is integrated and can be synchronized from the backend.
+- FAISS remains available as a fallback while Supabase is the preferred retrieval path.
+
 ## Seeded Skills
 
 The following skills were created and published so draft posts can reference them immediately:
@@ -257,6 +336,41 @@ The following skills were created and published so draft posts can reference the
 - WebGL
 
 These are matched by name when generating draft posts in Studio.
+
+## Seeded Tags
+
+The Sanity dataset was also populated with reusable tags so posts can be categorized more consistently. The published set includes areas such as:
+
+- AI Engineering
+- AI Workflows
+- AI Architecture
+- ML Engineering
+- Machine Learning
+- Deep Learning
+- Full Stack Development
+- Python
+- Vue.js
+- OpenAI
+- RAG Systems
+- Agentic AI
+- AI Agents
+- Prompt Engineering
+- Vector Search
+- Supabase
+- Portfolio Systems
+- Frontend Engineering
+- Backend Engineering
+- API Design
+- Web Development
+- Three.js
+- WebGL
+- IoT Systems
+- Embedded Systems
+- Cloud Deployment
+- MLOps
+- Knowledge Systems
+
+These tags make it easier to connect Build Log entries to technical themes and show growth over time across related disciplines.
 
 ## Environment Variables
 

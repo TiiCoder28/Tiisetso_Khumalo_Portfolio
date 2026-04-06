@@ -19,16 +19,21 @@ logging.basicConfig(level=logging.INFO,
 chatbot: Optional[PortfolioChatbot] = None
 
 
+def normalize_origin(origin: str) -> str:
+    return origin.strip().rstrip("/")
+
+
 def get_allowed_origins() -> list[str]:
     origins = [
-        # "http://localhost:5173",
-        # "http://localhost:3333",
-        # "http://localhost:8000",
+        "http://localhost:5173",
+        "http://localhost:3333",
+        "http://localhost:8000",
         os.getenv("FRONTEND_URL", ""),
         os.getenv("PUBLIC_SITE_URL", ""),
         os.getenv("STUDIO_URL", ""),
     ]
-    return [origin for origin in dict.fromkeys(origins) if origin]
+    normalized = [normalize_origin(origin) for origin in origins if origin and origin.strip()]
+    return [origin for origin in dict.fromkeys(normalized) if origin]
 
 
 @asynccontextmanager
@@ -36,6 +41,7 @@ async def lifespan(app: FastAPI):
     """Load the knowledge base when the app starts."""
     global chatbot
     logging.info("Starting Portfolio API...")
+    logging.info("Allowed CORS origins: %s", get_allowed_origins())
     chatbot = PortfolioChatbot()
     
     # Load both knowledge bases separately
