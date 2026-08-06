@@ -10,6 +10,20 @@ const timelineRef = ref(null)
 
 const experiences = [
   {
+    title: 'QA Engineer – Equities Regression & Test Automation',
+    company: 'RMB Equities Enablement Project (via Kion Consulting)',
+    period: 'May 2026 – Present',
+    type: 'current',
+    icon: '📈',
+    highlights: [
+      'Build and maintain a reusable MxTest functional regression pack for equity-derivative products in Murex, covering Digital Options, Barrier Options and Autocallables',
+      'Automate trade insertions, OSP workflow validations, lifecycle events and API-based test scenarios across front-office and downstream processes',
+      'Use SQL queries, environment initialisation and reusable variables to prepare test data, validate system conditions and improve pack maintainability',
+      'Investigate workflow exceptions and defects, compare expected and actual outcomes, and collaborate with front-office, settlements, integration and regression stakeholders',
+      'Improve test-pack quality through clearer naming conventions, modular structure, documentation, version control and handover-ready implementation'
+    ]
+  },
+  {
     title: 'AI Developer & Full-Stack Engineer',
     company: 'Kion Consulting',
     period: 'Feb 2025 – Present',
